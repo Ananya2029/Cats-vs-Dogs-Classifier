@@ -1,0 +1,5 @@
+numpy
+tensorflow>=2.16
+flask
+pillow
+werkzeug

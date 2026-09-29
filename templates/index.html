@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cats vs Dogs Classifier</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f4f6fb; color: #1f2937; margin: 0; }
+    main { max-width: 520px; margin: 48px auto; background: #fff; padding: 32px; border-radius: 12px;
+           box-shadow: 0 4px 16px rgba(0,0,0,.08); text-align: center; }
+    h1 { margin-top: 0; }
+    input[type=file] { margin: 16px 0; }
+    button { background: #2563eb; color: #fff; border: 0; padding: 10px 24px; border-radius: 8px;
+             font-size: 16px; cursor: pointer; }
+    img { max-width: 100%; max-height: 320px; border-radius: 8px; margin-top: 20px; }
+    .result { font-size: 24px; font-weight: 600; margin-top: 16px; }
+    .error { color: #b91c1c; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🐱 Cats vs Dogs 🐶</h1>
+    <p>Upload a photo and the CNN will predict whether it shows a cat or a dog.</p>
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".png,.jpg,.jpeg" required><br>
+      <button type="submit">Predict</button>
+    </form>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    {% if result %}
+      <img src="{{ url_for('static', filename=image_url) }}" alt="Uploaded image">
+      <p class="result">It's a {{ result }}! ({{ "%.0f"|format(confidence * 100) }}% confident)</p>
+    {% endif %}
+  </main>
+</body>
+</html>
